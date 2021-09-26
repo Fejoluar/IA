@@ -2,7 +2,7 @@ clear all
 close all
 clc
 
-%PAR¬METROS PARA DETERMINAR O CHUTE INICIAL DO PERÕODO////////////////////
+%PAR√ÇMETROS PARA DETERMINAR O CHUTE INICIAL DO PER√çODO////////////////////
 
 format shortg
 
@@ -19,12 +19,12 @@ teta = 0;
 
 periodoOtimo = periodo_inicial(ns,lambda,teta)
 
-%%DEFINI«√O DO PROBLEMA///////////////////////////////////////////////////
+%%DEFINI√á√ÉO DO PROBLEMA///////////////////////////////////////////////////
 
 
-Numero_Variaveis = 2;        % NUMERO DE VARI¡VEIS DE DECIS√O
+Numero_Variaveis = 2;        % NUMERO DE VARI√ÅVEIS DE DECIS√ÉO
 
-Tamanho_Variaveis = [1 Numero_Variaveis];         % TAMANHO DA MATRIZ DAS VARI¡VEIS DE DECIS√O
+Tamanho_Variaveis = [1 Numero_Variaveis];         % TAMANHO DA MATRIZ DAS VARI√ÅVEIS DE DECIS√ÉO
 
 periodo_minimo = periodoOtimo - periodoOtimo*0.5 ;
 
@@ -34,18 +34,18 @@ h_minimo = 1;
 
 h_maximo = 100;
 
-Valor_Minimo = [periodo_minimo h_minimo]	% VALOR MINÕMO DAS VARIAVEIS DE DECIS√O
+Valor_Minimo = [periodo_minimo h_minimo]	% VALOR MIN√çMO DAS VARIAVEIS DE DECIS√ÉO
 
-Valor_Maximo = [periodo_maximo h_maximo]    % VALOR M¡XIMO DAS VARIAVEIS DE DECIS√O
+Valor_Maximo = [periodo_maximo h_maximo]    % VALOR M√ÅXIMO DAS VARIAVEIS DE DECIS√ÉO
 
 
 
-%% PAR¬METROS DPSO
-Maxima_Iteracao = 100;   % N⁄MERO M¡XIMO DE ITERA«’ES
+%% PAR√ÇMETROS DPSO
+Maxima_Iteracao = 100;   % N√öMERO M√ÅXIMO DE ITERA√á√ïES
 
-Numero_Particula = 100;     % QUANTIDADE DE PARTÕCULAS
+Numero_Particula = 100;     % QUANTIDADE DE PART√çCULAS
 
-w = 0.7;           % COEFICIENTE DE IN…RCIA
+w = 0.7;           % COEFICIENTE DE IN√âRCIA
 
 C1 = 2;
 
@@ -58,7 +58,7 @@ Velocidade_Minima  = - Velocidade_Maxima;
 posicao_historico = zeros(Numero_Particula , Maxima_Iteracao , Numero_Variaveis );
 
 
-% InicializaÁ„o das particulas/////////////////////////////////////////
+% Inicializa√ß√£o das particulas/////////////////////////////////////////
 
 
 particula_vazia.Posicao = [];
@@ -71,36 +71,36 @@ particula_vazia.Melhor.Posicao = [];
 
 particula_vazia.Melhor.Funcao_Objetivo = [];
 
-%CriaÁ„o das particulas///////////////////////////////////////////////
+%Cria√ß√£o das particulas///////////////////////////////////////////////
 
 particula = repmat( particula_vazia, Numero_Particula, 1);
 
-% InicializaÁ„o da melhor funÁ„o objetivo
+% Inicializa√ß√£o da melhor fun√ß√£o objetivo
 
 MelhorGlobal.Funcao_Objetivo = -inf;
 
 
     
-    % InicializaÁ„o das partÌculas
+    % Inicializa√ß√£o das part√≠culas
     
     for k=1:Numero_Particula
         
-        % GeraÁ„o da posiÁıes iniciais das partÌculas
+        % Gera√ß√£o da posi√ß√µes iniciais das part√≠culas
         
         particula(k).Posicao = unifrnd(Valor_Minimo, Valor_Maximo, Tamanho_Variaveis);
         
         
-        % InicializaÁ„o Velocidade
+        % Inicializa√ß√£o Velocidade
         
         particula(k).Velocidade = zeros(Tamanho_Variaveis);
         
         % particula(i).Velocidade = 0.1.*  particula(i).Posicao;
         
-        % EvoluÁ„o
+        % Evolu√ß√£o
         
         particula(k).Funcao_Objetivo =  sensibilidade_grade_simples(L,ns,lambda,teta,particula(k).Posicao(1),particula(k).Posicao(2));
         
-        %Armazenamento da melhor posic„o de cada partÌcula
+        %Armazenamento da melhor posic√£o de cada part√≠cula
         
         particula(k).Melhor.Posicao = particula(k).Posicao;
         
@@ -153,11 +153,11 @@ MelhorGlobal.Funcao_Objetivo = -inf;
             
             particula(k).Velocidade(index2) = Velocidade_Minima(index2);
             
-            % ATUALIZANDO POSI«√O
+            % ATUALIZANDO POSI√á√ÉO
             
             particula(k).Posicao = particula(k).Posicao + particula(k).Velocidade;
             
-            % Checando posiÁ„o
+            % Checando posi√ß√£o
             
             indice_posicao1 = find(  particula(k).Posicao > Valor_Maximo);
             
@@ -167,12 +167,12 @@ MelhorGlobal.Funcao_Objetivo = -inf;
             
             particula(k).Posicao(indice_posicao2) = Valor_Minimo(indice_posicao2);
             
-            % ATUALIZANDO VALOR DA FUN«√O OBJETIVO
+            % ATUALIZANDO VALOR DA FUN√á√ÉO OBJETIVO
             
             particula(k).Funcao_Objetivo = sensibilidade_grade_simples(L,ns,lambda,teta,particula(k).Posicao(1),particula(k).Posicao(2));
             
             
-            % Carregamento da melhor posiÁ„o de cada partÌcula
+            % Carregamento da melhor posi√ß√£o de cada part√≠cula
             
             if particula(k).Funcao_Objetivo > particula(k).Melhor.Funcao_Objetivo
                 
@@ -192,18 +192,17 @@ MelhorGlobal.Funcao_Objetivo = -inf;
         
         Melhor_Funcao_Objetivo(it) = MelhorGlobal.Funcao_Objetivo;
         
-        disp(['IteraÁ„o ' num2str(it) ': SENSIBILIDADE = ' num2str( Melhor_Funcao_Objetivo(it)) '  periodo =  ' num2str(  MelhorGlobal.Posicao(1))...
+        disp(['Itera√ß√£o ' num2str(it) ': SENSIBILIDADE = ' num2str( Melhor_Funcao_Objetivo(it)) '  periodo =  ' num2str(  MelhorGlobal.Posicao(1))...
             '  amplitude =  ' num2str( MelhorGlobal.Posicao(2))     ] );
         
         curva(it) = MelhorGlobal.Funcao_Objetivo;
         
-%             figure(1)
-%             clf;
-%             plot(posicao_historico(:,it,1),posicao_historico(:,it,2),'bx');             % DESENHANDO A MOVIMENTA«√O DAS PARTÕCULAS
-%         
-%             pause(0.0001);
-%         
-        
+           figure(1)
+            clf;
+             plot(posicao_historico(:,it,1),posicao_historico(:,it,2),'bx');             % DESENHANDO A MOVIMENTA√á√ÉO DAS PART√çCULAS
+         
+             pause(0.0001);
+             
         
         
     end
